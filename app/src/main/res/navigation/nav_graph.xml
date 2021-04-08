@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/tasksListFragment">
+
+
+    <fragment
+        android:id="@+id/tasksListFragment"
+        android:name="com.hawkerlabs.tadah.presentation.tasks_list.ui.ListsFragment"
+        android:label="TasksListFragment" >
+        <action
+            android:id="@+id/action_tasksListFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+        <action
+            android:id="@+id/action_tasksListFragment_to_authActivity"
+            app:destination="@id/authActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.hawkerlabs.tadah.presentation.create_list.ui.CreateListFragment"
+        android:label="AddTaskFragment" />
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.hawkerlabs.tadah.presentation.auth.ui.AuthActivity"
+        android:label="AuthActivity" />
+</navigation>
