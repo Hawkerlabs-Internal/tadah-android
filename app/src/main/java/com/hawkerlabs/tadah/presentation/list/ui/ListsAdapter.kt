@@ -1,4 +1,4 @@
-package com.hawkerlabs.tadah.presentation.tasks_list.ui
+package com.hawkerlabs.tadah.presentation.list.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.data.database.entities.Task
-import com.hawkerlabs.tadah.databinding.ListItemBinding
+import com.hawkerlabs.tadah.databinding.ListRowBinding
 
-class ListsAdapter : ListAdapter<Task, ListsViewHolder>(COMPARATOR) {
+class ListsAdapter (private val listener: (Task) -> Unit): ListAdapter<Task, ListsViewHolder>(COMPARATOR) {
 
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<Task>() {
@@ -28,8 +28,8 @@ class ListsAdapter : ListAdapter<Task, ListsViewHolder>(COMPARATOR) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListsViewHolder {
-        val binding: ListItemBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context), R.layout.list_item,
+        val binding: ListRowBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context), R.layout.list_row,
                 parent, false
         )
         return ListsViewHolder(binding)
@@ -38,7 +38,7 @@ class ListsAdapter : ListAdapter<Task, ListsViewHolder>(COMPARATOR) {
     override fun onBindViewHolder(holder: ListsViewHolder, position: Int) {
         val task = getItem(position)
         if (task != null) {
-            holder.bind(task)
+            holder.bind(task, listener)
         }
     }
 }

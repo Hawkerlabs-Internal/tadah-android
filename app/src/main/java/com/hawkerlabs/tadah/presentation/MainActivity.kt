@@ -5,7 +5,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +22,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            android.R.id.home -> {
+//                findNavController(binding.root).popBackStack()
+//                return true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
     fun showHomeEnabled(title: String){
         supportActionBar?.title = title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

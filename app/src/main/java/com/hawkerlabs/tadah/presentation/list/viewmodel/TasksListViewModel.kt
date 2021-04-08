@@ -1,4 +1,4 @@
-package com.hawkerlabs.tadah.presentation.tasks_list.viewmodel
+package com.hawkerlabs.tadah.presentation.list.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

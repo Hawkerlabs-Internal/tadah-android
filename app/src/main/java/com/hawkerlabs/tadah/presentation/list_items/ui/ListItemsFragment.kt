@@ -1,4 +1,4 @@
-package com.hawkerlabs.tadah.presentation.create_list.ui
+package com.hawkerlabs.tadah.presentation.list_items.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,17 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.hawkerlabs.tadah.R
-import com.hawkerlabs.tadah.databinding.FragmentCreateListBinding
+import com.hawkerlabs.tadah.databinding.FragmentListItemsBinding
 import com.hawkerlabs.tadah.presentation.MainActivity
-import com.hawkerlabs.tadah.presentation.create_list.viewmodel.CreateListViewModel
+import com.hawkerlabs.tadah.presentation.list_items.viewmodel.ListItemsFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateListFragment : Fragment() {
-    private lateinit var binding: FragmentCreateListBinding
-    private val viewModel by viewModels<CreateListViewModel>()
+class ListItemsFragment : Fragment() {
+    private lateinit var binding: FragmentListItemsBinding
+    private val viewModel by viewModels<ListItemsFragmentViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
@@ -32,12 +31,17 @@ class CreateListFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_list, container, false)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_items, container, false)
+
         return binding.root
 
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initialize()
+        subscribe()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -51,20 +55,9 @@ class CreateListFragment : Fragment() {
         return false
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialize()
-        subscribe()
-    }
-
     private fun initialize() {
-        binding.buttonSave.setOnClickListener {
-            viewModel.saveTask()
-            findNavController().popBackStack()
+        (activity as? MainActivity)?.showHomeEnabled("Tasks")
 
-        }
-
-        (activity as? MainActivity)?.showHomeEnabled("Add Task")
     }
 
     private fun subscribe() {

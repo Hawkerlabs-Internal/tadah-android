@@ -1,4 +1,4 @@
-package com.hawkerlabs.tadah.presentation.tasks_list.ui
+package com.hawkerlabs.tadah.presentation.list.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.databinding.FragmentListsBinding
 import com.hawkerlabs.tadah.domain.tasks.model.TasksResponse
 import com.hawkerlabs.tadah.presentation.MainActivity
-import com.hawkerlabs.tadah.presentation.tasks_list.viewmodel.TasksListViewModel
+import com.hawkerlabs.tadah.presentation.list.viewmodel.TasksListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,7 @@ class ListsFragment : Fragment() {
 
     private lateinit var binding: FragmentListsBinding
     private val viewModel by viewModels<TasksListViewModel>()
-    private var listsAdapter: ListsAdapter = ListsAdapter()
+    private lateinit var listsAdapter: ListsAdapter
 
 
     override fun onCreateView(
@@ -44,6 +44,10 @@ class ListsFragment : Fragment() {
         binding.addTaskFab.setOnClickListener {
             findNavController().navigate(R.id.addTaskFragment)
         }
+        listsAdapter = ListsAdapter {
+            findNavController().navigate(R.id.listItemsFragment)
+        }
+
         binding.tasksRecyclerView.adapter = listsAdapter
     }
 
