@@ -3,4 +3,17 @@
     <dimen name="medium_margin">24dp</dimen>
     <dimen name="small_margin">16dp</dimen>
     <dimen name="extra_small_margin">8dp</dimen>
+
+    <!-- Edit Text -->
+    <dimen name="search_edit_text_stroke_width">1dp</dimen>
+    <dimen name="search_edit_text_radius">4dp</dimen>
+
+
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_large">12dp</dimen>
+    <dimen name="padding_extra_large">16dp</dimen>
+
+    <dimen name="padding_extra_larger">24dp</dimen>
+    <dimen name="padding_ultra_large">32dp</dimen>
+    <dimen name="padding_ultra_larger">48dp</dimen>
 </resources>

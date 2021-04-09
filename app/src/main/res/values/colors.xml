@@ -8,7 +8,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="white_">#00000000</color>
+
+
     <color name="colorPrimary">#006837</color>
     <color name="colorPrimaryDark">#004012</color>
     <color name="colorAccent">#c75f00</color>
+
+    <!-- Edit text-->
+    <color name="colorDivider">#d0d0d0</color>
+    <color name="colorTextDark">#0E213D</color>
+    <color name="colorTextLight">#556783</color>
+    <color name="colorTextWhite">#FFFFFF</color>
 </resources>
