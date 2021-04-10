@@ -1,12 +1,12 @@
 package com.hawkerlabs.tadah.domain.tasks
 
-import com.hawkerlabs.tadah.data.database.entities.Task
+import com.hawkerlabs.tadah.data.database.model.List
 import com.hawkerlabs.tadah.domain.tasks.model.TasksResponse
 import kotlinx.coroutines.flow.Flow
 
-interface TasksUseCase {
+interface ListsUseCase {
 
-    suspend fun addTask(task : Task)
+    suspend fun createList(task : List)
 
     suspend fun getAllTasks() : Flow<TasksResponse>
 }

@@ -64,7 +64,7 @@ class CreateListFragment : Fragment() {
 
         }
 
-        (activity as? MainActivity)?.showHomeEnabled("Add Task")
+        (activity as? MainActivity)?.showHomeEnabled("Add List")
     }
 
     private fun subscribe() {

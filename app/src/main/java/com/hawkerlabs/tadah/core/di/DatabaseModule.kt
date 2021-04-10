@@ -2,8 +2,8 @@ package com.hawkerlabs.tadah.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.hawkerlabs.tadah.data.database.TasksDatabase
-import com.hawkerlabs.tadah.data.database.dao.TaskDao
+import com.hawkerlabs.tadah.data.database.ListsDatabase
+import com.hawkerlabs.tadah.data.database.dao.ListDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,22 +16,22 @@ import javax.inject.Singleton
 class DatabaseModule {
 
     @Provides
-    fun provideTaskDao(appDatabase: TasksDatabase): TaskDao {
+    fun provideTaskDao(appDatabase: ListsDatabase): ListDao {
         return appDatabase.taskDao()
     }
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext appContext: Context): TasksDatabase {
+    fun provideAppDatabase(@ApplicationContext appContext: Context): ListsDatabase {
         return Room.databaseBuilder(
                 appContext,
-                TasksDatabase::class.java,
+                ListsDatabase::class.java,
                 DATABASE_NAME
         ).build()
     }
 
     companion object {
-        private const val DATABASE_NAME = "Tasks"
+        private const val DATABASE_NAME = "Lists"
 
     }
 }

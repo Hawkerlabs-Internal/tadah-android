@@ -6,22 +6,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.hawkerlabs.tadah.R
-import com.hawkerlabs.tadah.data.database.entities.Task
+import com.hawkerlabs.tadah.data.database.model.List
 import com.hawkerlabs.tadah.databinding.ListRowBinding
 
-class ListsAdapter (private val listener: (Task) -> Unit): ListAdapter<Task, ListsViewHolder>(COMPARATOR) {
+class ListsAdapter (private val listener: (List) -> Unit): ListAdapter<List, ListsViewHolder>(COMPARATOR) {
 
     companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<Task>() {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<List>() {
             override fun areItemsTheSame(
-                    oldItem: Task,
-                    newItem: Task
+                    oldItem: List,
+                    newItem: List
             ): Boolean =
                     oldItem.title == newItem.title
 
             override fun areContentsTheSame(
-                    oldItem: Task,
-                    newItem: Task
+                    oldItem: List,
+                    newItem: List
             ): Boolean =
                     oldItem == newItem
         }

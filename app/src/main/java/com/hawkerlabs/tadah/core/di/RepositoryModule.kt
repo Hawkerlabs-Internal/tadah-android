@@ -1,7 +1,7 @@
 package com.hawkerlabs.tadah.core.di
 
-import com.hawkerlabs.tadah.data.database.dao.TaskDao
-import com.hawkerlabs.tadah.data.repository.TasksRepository
+import com.hawkerlabs.tadah.data.database.dao.ListDao
+import com.hawkerlabs.tadah.data.repository.ListsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +13,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 class RepositoryModule {
     @Provides
     @ViewModelScoped
-    fun provideTasksRepository(dao : TaskDao) : TasksRepository {
-        return TasksRepository(dao)
+    fun provideTasksRepository(dao : ListDao) : ListsRepository {
+        return ListsRepository(dao)
     }
 }
