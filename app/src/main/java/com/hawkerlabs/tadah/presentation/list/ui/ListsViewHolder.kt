@@ -8,9 +8,9 @@ class ListsViewHolder(private val binding : ListRowBinding) : RecyclerView.ViewH
 
     fun bind(item : List, listener : (List) -> Unit){
         with(binding){
-            task = item
+            list = item
             binding.cardLayout.setOnClickListener {
-                listener(task!!)
+                listener(list!!)
             }
         }
     }

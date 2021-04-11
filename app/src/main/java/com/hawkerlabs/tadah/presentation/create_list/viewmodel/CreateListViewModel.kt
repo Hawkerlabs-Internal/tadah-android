@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hawkerlabs.tadah.data.database.model.List
-import com.hawkerlabs.tadah.domain.tasks.ListsUseCase
+import com.hawkerlabs.tadah.domain.lists.ListsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

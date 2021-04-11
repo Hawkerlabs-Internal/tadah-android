@@ -1,4 +1,4 @@
-package com.hawkerlabs.tadah.domain.tasks.model
+package com.hawkerlabs.tadah.domain.lists.model
 
 import com.hawkerlabs.tadah.data.database.model.List
 

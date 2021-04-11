@@ -4,22 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.databinding.FragmentListsBinding
-import com.hawkerlabs.tadah.domain.tasks.model.TasksResponse
+import com.hawkerlabs.tadah.domain.lists.model.TasksResponse
 import com.hawkerlabs.tadah.presentation.MainActivity
-import com.hawkerlabs.tadah.presentation.list.viewmodel.TasksListViewModel
+import com.hawkerlabs.tadah.presentation.list.viewmodel.ListsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ListsFragment : Fragment() {
 
     private lateinit var binding: FragmentListsBinding
-    private val viewModel by viewModels<TasksListViewModel>()
+    private val viewModel by viewModels<ListsViewModel>()
     private lateinit var listsAdapter: ListsAdapter
 
 
@@ -42,12 +43,19 @@ class ListsFragment : Fragment() {
     private fun initialize() {
         (activity as? MainActivity)?.hideHomeEnabled("Tadah Smart Todo")
         binding.addTaskFab.setOnClickListener {
-            findNavController().navigate(R.id.addTaskFragment)
-        }
-        listsAdapter = ListsAdapter {
-            findNavController().navigate(R.id.listItemsFragment)
+//            findNavController().navigate(R.id.addTaskFragment)
+            val dialog = CreateListDialog(requireContext())
+            dialog.show()
         }
 
+        //List adapter takes a lambda for the item click listener
+        listsAdapter = ListsAdapter  { list->
+            var bundle = bundleOf("list" to list)
+            findNavController().navigate(R.id.listItemsFragment,bundle)
+        }
+
+
+        //set up the adapter
         binding.tasksRecyclerView.adapter = listsAdapter
     }
 

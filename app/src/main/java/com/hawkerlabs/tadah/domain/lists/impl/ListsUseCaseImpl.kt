@@ -1,9 +1,9 @@
-package com.hawkerlabs.tadah.domain.tasks.impl
+package com.hawkerlabs.tadah.domain.lists.impl
 
 import com.hawkerlabs.tadah.data.database.model.List
 import com.hawkerlabs.tadah.data.repository.ListsRepository
-import com.hawkerlabs.tadah.domain.tasks.ListsUseCase
-import com.hawkerlabs.tadah.domain.tasks.model.TasksResponse
+import com.hawkerlabs.tadah.domain.lists.ListsUseCase
+import com.hawkerlabs.tadah.domain.lists.model.TasksResponse
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -19,6 +19,10 @@ class ListsUseCaseImpl @Inject constructor(private val repository : ListsReposit
 
     override suspend fun createList(list: List) {
         repository.createList(list)
+    }
+
+    override suspend fun deleteList(list: List) {
+        repository.deleteList(list)
     }
 
     override suspend fun getAllTasks(): Flow<TasksResponse> {
