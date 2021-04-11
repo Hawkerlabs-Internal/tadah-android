@@ -3,6 +3,7 @@ package com.hawkerlabs.tadah.core.di
 import android.content.Context
 import androidx.room.Room
 import com.hawkerlabs.tadah.data.database.ListsDatabase
+import com.hawkerlabs.tadah.data.database.dao.ListItemDao
 import com.hawkerlabs.tadah.data.database.dao.ListDao
 import dagger.Module
 import dagger.Provides
@@ -16,8 +17,13 @@ import javax.inject.Singleton
 class DatabaseModule {
 
     @Provides
-    fun provideTaskDao(appDatabase: ListsDatabase): ListDao {
+    fun provideListsDao(appDatabase: ListsDatabase): ListDao {
         return appDatabase.taskDao()
+    }
+
+    @Provides
+    fun provideListItemsDao(appDatabase: ListsDatabase): ListItemDao {
+        return appDatabase.itemDao()
     }
 
     @Provides

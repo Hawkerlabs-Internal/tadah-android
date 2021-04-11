@@ -13,9 +13,13 @@ import androidx.navigation.fragment.findNavController
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.databinding.FragmentCreateListBinding
 import com.hawkerlabs.tadah.presentation.MainActivity
-import com.hawkerlabs.tadah.presentation.create_list.viewmodel.CreateListViewModel
+import com.hawkerlabs.tadah.presentation.list.viewmodel.CreateListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
+/**
+ * TODO - delete
+ */
 @AndroidEntryPoint
 class CreateListFragment : Fragment() {
     private lateinit var binding: FragmentCreateListBinding

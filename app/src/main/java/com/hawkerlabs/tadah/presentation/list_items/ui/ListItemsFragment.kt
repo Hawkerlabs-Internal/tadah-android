@@ -3,10 +3,7 @@ package com.hawkerlabs.tadah.presentation.list_items.ui
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -38,7 +35,8 @@ class ListItemsFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list_items, container, false)
-
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         return binding.root
 
 
@@ -65,6 +63,17 @@ class ListItemsFragment : Fragment() {
         (activity as? MainActivity)?.showHomeEnabled("Tasks")
 
         list = arguments?.get("list") as List
+
+        //Fetch items for this list
+        viewModel.getItems(list.id)
+
+        binding.item.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                viewModel.addItem(list.id)
+                return@setOnKeyListener true;
+            }
+            return@setOnKeyListener false;
+        }
         binding.addItemFab.setOnClickListener { v ->
             toggleFabMode(v)
         }
@@ -75,6 +84,9 @@ class ListItemsFragment : Fragment() {
 
     private fun subscribe() {
 
+        viewModel.items.observe(requireActivity()){
+            it
+        }
     }
 
     private fun showAlert() {

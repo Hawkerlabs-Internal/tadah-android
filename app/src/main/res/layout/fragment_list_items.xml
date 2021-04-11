@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hawkerlabs.tadah.presentation.list_items.viewmodel.ListItemsFragmentViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -41,8 +45,9 @@
                 tools:ignore="VectorDrawableCompat" />
 
             <EditText
-                android:id="@+id/etSearch"
+                android:id="@+id/item"
                 style="@style/TextFieldStyle"
+                android:text="@={viewModel.item}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

@@ -6,51 +6,100 @@
 
         <variable
             name="viewModel"
-            type="com.hawkerlabs.tadah.presentation.create_list.viewmodel.CreateListViewModel" />
+            type="com.hawkerlabs.tadah.presentation.list.viewmodel.CreateListViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/medium_margin">
+        android:background="@android:color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-
-        <EditText
-            android:id="@+id/title"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:hint="@string/task_title"
-            android:inputType="text"
-            android:text="@={viewModel.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
 
-        <EditText
-            android:id="@+id/description"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+<!--                <androidx.appcompat.widget.AppCompatImageButton-->
+<!--                    android:id="@+id/btn_close"-->
+<!--                    android:layout_width="?attr/actionBarSize"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    android:tint="@android:color/white"-->
+<!--                    app:srcCompat="@drawable/ic_close" />-->
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="@dimen/medium_margin"
+                    android:text="New List"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    android:textColor="@android:color/white" />
+
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:hint="@string/task_description"
-            android:inputType="text"
-            android:text="@={viewModel.description}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/medium_margin"
+            android:scrollbars="none"
+            android:scrollingCache="true">
 
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
-            android:background="@color/colorPrimary"
-            android:text="@string/save"
-            android:textColor="@android:color/white"
-            app:layout_constraintTop_toBottomOf="@id/description" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:hint="@string/task_title"
+                    android:inputType="text"
+                    android:text="@={viewModel.title}" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:hint="@string/task_description"
+                    android:inputType="text"
+                    android:text="@={viewModel.description}" />
+
+                <Button
+                    android:id="@+id/buttonSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/save"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintTop_toBottomOf="@id/description" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+
+    </LinearLayout>
 </layout>

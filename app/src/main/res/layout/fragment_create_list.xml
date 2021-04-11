@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.hawkerlabs.tadah.presentation.create_list.viewmodel.CreateListViewModel" />
+            type="com.hawkerlabs.tadah.presentation.list.viewmodel.CreateListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

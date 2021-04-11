@@ -8,7 +8,6 @@ import java.util.*
 
 @Parcelize
 @Entity(tableName = "items")
-data class Item (@PrimaryKey
-             val id: String = UUID.randomUUID().toString(),
+data class Item (@PrimaryKey val id: String = UUID.randomUUID().toString(),
                  val listId: String,
-             val title: String? = null): Parcelable
+                 val title: String? = null): Parcelable
