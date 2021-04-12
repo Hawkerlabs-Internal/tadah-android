@@ -10,11 +10,11 @@ import kotlinx.android.parcel.Parcelize
  * One list has many items, this is a One to Many Relationship
  */
 @Parcelize
-data class ListItems (@Embedded
+data class ItemsByList (@Embedded
                       val list: com.hawkerlabs.tadah.data.database.model.List,
 
-                      @Relation(
+                        @Relation(
                              parentColumn = "id",
                              entityColumn = "listId"
                      )
-                      val items: List<Item>): Parcelable
+                      val items: List<Item>?): Parcelable

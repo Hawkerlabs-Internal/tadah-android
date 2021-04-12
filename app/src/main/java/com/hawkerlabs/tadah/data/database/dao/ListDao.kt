@@ -2,6 +2,7 @@ package com.hawkerlabs.tadah.data.database.dao
 
 import androidx.room.*
 import com.hawkerlabs.tadah.data.database.model.List
+import com.hawkerlabs.tadah.data.database.model.relations.ItemsByList
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,4 +16,9 @@ interface ListDao {
 
     @Delete
     suspend fun deleteList(task: List)
+
+
+    @Transaction
+    @Query("SELECT * FROM lists WHERE id = :listId")
+    suspend fun getItemsByList(listId: String): ItemsByList
 }

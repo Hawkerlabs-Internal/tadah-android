@@ -84,7 +84,7 @@ class ListItemsFragment : Fragment() {
 
     private fun subscribe() {
 
-        viewModel.items.observe(requireActivity()){
+        viewModel.items.observe(viewLifecycleOwner){
             it
         }
     }

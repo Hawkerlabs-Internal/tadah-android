@@ -2,14 +2,14 @@ package com.hawkerlabs.tadah.data.database.dao
 
 import androidx.room.*
 import com.hawkerlabs.tadah.data.database.model.Item
-import com.hawkerlabs.tadah.data.database.model.relations.ListItems
+import com.hawkerlabs.tadah.data.database.model.relations.ItemsByList
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ListItemDao {
     @Transaction
     @Query("SELECT * FROM items WHERE listId = :listId")
-    fun getItemsForListFlow(listId : String): Flow<ListItems>
+    suspend fun getItemsForListFlow(listId : String): ItemsByList
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

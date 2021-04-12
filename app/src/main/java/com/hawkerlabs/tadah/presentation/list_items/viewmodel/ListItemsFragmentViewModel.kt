@@ -3,10 +3,10 @@ package com.hawkerlabs.tadah.presentation.list_items.viewmodel
 import androidx.lifecycle.*
 import com.hawkerlabs.tadah.data.database.model.Item
 import com.hawkerlabs.tadah.data.database.model.List
-import com.hawkerlabs.tadah.data.database.model.relations.ListItems
+import com.hawkerlabs.tadah.data.database.model.relations.ItemAndList
+import com.hawkerlabs.tadah.data.database.model.relations.ItemsByList
 import com.hawkerlabs.tadah.domain.list_item.ListItemUseCase
 import com.hawkerlabs.tadah.domain.lists.ListsUseCase
-import com.hawkerlabs.tadah.domain.lists.model.TasksResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,8 +18,7 @@ class ListItemsFragmentViewModel @Inject constructor(private val listsUseCase: L
     val item = MutableLiveData<String>("")
     private val listIdLiveData = MutableLiveData<String>()
 
-
-    val items: LiveData<ListItems> = listIdLiveData.switchMap { listId ->
+    val items: LiveData<kotlin.collections.List<ItemAndList>> = listIdLiveData.switchMap { listId ->
         liveData {
             val repos = listItemUseCase.getItems(listId).asLiveData(Dispatchers.Main)
             emitSource(repos)
