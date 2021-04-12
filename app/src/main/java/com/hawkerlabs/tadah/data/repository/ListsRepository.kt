@@ -43,15 +43,6 @@ class ListsRepository @Inject constructor(private val listsDao: ListDao, private
                 }
                 listItemsFlow.emit(listItems)
             }
-
-//            itemsDao.getItemsForListFlow(listId).let{ itemsByList ->
-//                println("Items ${itemsByList.items}")
-//                val items = itemsByList.items ?: emptyList()
-//                val listItems = items.map {
-//                    ItemAndList(it, itemsByList.list)
-//                }
-//                listItemsFlow.emit(listItems)
-//            }
         }
 
     }

@@ -16,7 +16,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_height="wrap_content"/>
 
-        <!-- Tasks Recycler View -->
+        <!-- Lists Recycler View -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksRecyclerView"
             android:layout_width="match_parent"
