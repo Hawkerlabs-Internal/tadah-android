@@ -10,12 +10,7 @@ import javax.inject.Inject
 
 class ListItemUseCaseImpl @Inject constructor(private val repository : ListsRepository): ListItemUseCase {
 
-//    private val items : Flow<ListItemsResponse>
-//        get() =  repository.getListItemsFlow().map {
-//            ListItemsResponse.Success(it)
-//        }.catch {
-//            ListItemsResponse.Error(it.cause)
-//        }
+
 
     override suspend fun getItems(listId: String) : Flow<List<ItemAndList>>{
         return repository.getItemsByListFlow(listId)
