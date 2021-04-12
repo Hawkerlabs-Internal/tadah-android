@@ -21,4 +21,18 @@
         <item name="android:singleLine">true</item>
         <item name="android:inputType">text</item>
     </style>
+
+    <!--Checkbox-->
+    <style name="CheckBoxTextStyle" parent="TextStyleRegular">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/colorTextDark</item>
+        <item name="android:layout_marginStart">@dimen/margin_extra_large</item>
+        <item name="android:layout_marginEnd">@dimen/margin_extra_large</item>
+    </style>
+
+    <style name="CheckBoxStyle" parent="CheckBoxTextStyle">
+        <item name="android:buttonTint">@color/colorPrimary</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
 </resources>

@@ -14,6 +14,7 @@ import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.data.database.model.List
 import com.hawkerlabs.tadah.databinding.FragmentListItemsBinding
 import com.hawkerlabs.tadah.presentation.MainActivity
+import com.hawkerlabs.tadah.presentation.list.ui.ListsAdapter
 import com.hawkerlabs.tadah.presentation.list_items.viewmodel.ListItemsFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +24,9 @@ class ListItemsFragment : Fragment() {
     private val viewModel by viewModels<ListItemsFragmentViewModel>()
     private var rotate = false
     private lateinit var list : List
+
+    private lateinit var listItemsAdapter: ListItemsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -64,6 +68,10 @@ class ListItemsFragment : Fragment() {
 
         list = arguments?.get("list") as List
 
+        //Init adapter
+        listItemsAdapter = ListItemsAdapter()
+        binding.itemsRecyclerView.adapter = listItemsAdapter
+
         //Fetch items for this list
         viewModel.getItems(list.id)
 
@@ -85,7 +93,7 @@ class ListItemsFragment : Fragment() {
     private fun subscribe() {
 
         viewModel.items.observe(viewLifecycleOwner){
-            it
+            listItemsAdapter.submitList(it?.toMutableList())
         }
     }
 

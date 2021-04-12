@@ -10,4 +10,4 @@ import java.util.*
 @Entity(tableName = "items")
 data class Item (@PrimaryKey val id: String = UUID.randomUUID().toString(),
                  val listId: String,
-                 val title: String? = null): Parcelable
+                 var title: String? = null): Parcelable
