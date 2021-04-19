@@ -19,7 +19,6 @@ class ListsRepository @Inject constructor(private val listsDao: ListDao, private
     val tasksFlow: Flow<kotlin.collections.List<List>>
         get() = listsDao.getAllTasksFlow()
 
-    private val listItemsFlow = MutableSharedFlow<kotlin.collections.List<ItemAndList>>(replay = 1)
 
     suspend fun createList(list: List) = withContext(Dispatchers.IO) {
         listsDao.createList(list)
@@ -31,27 +30,13 @@ class ListsRepository @Inject constructor(private val listsDao: ListDao, private
 
 
 
-
-
-    private suspend fun requestData(listId: String) {
-
-        withContext(Dispatchers.IO) {
-            listsDao.getItemsByList(listId).let { itemsByList ->
-                val items = itemsByList.items ?: emptyList()
-                val listItems = items.map {
-                    ItemAndList(it, itemsByList.list)
-                }
-                listItemsFlow.emit(listItems)
-            }
+    suspend fun getItemsByListFromLocalStore(listId: String) : ItemsByList{
+        return withContext(Dispatchers.IO) {
+            listsDao.getItemsByList(listId)
         }
-
     }
 
-   suspend fun getItemsByListFlow(listId: String): Flow<kotlin.collections.List<ItemAndList>> {
 
-       requestData(listId)
-        return listItemsFlow
-    }
     /**
      * Save an item
      */

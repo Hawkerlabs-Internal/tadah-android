@@ -5,14 +5,14 @@
     <data>
 
         <variable
-            name="itemAndList"
-            type="com.hawkerlabs.tadah.data.database.model.relations.ItemAndList" />
+            name="item"
+            type="com.hawkerlabs.tadah.data.database.model.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_large">
+        android:padding="@dimen/padding_small">
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/itemName"
@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="@{itemAndList.item.title}" />
+            tools:text="@{item.title}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

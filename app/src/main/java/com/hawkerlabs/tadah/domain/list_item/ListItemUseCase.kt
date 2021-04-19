@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ListItemUseCase {
 
-    suspend fun getItems(listId : String) : Flow<List<ItemAndList>>
+    suspend fun getItems(listId : String) : Flow<List<Item>>
 
     suspend fun saveItem(list : Item)
 }

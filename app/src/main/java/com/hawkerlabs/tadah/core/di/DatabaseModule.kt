@@ -33,11 +33,10 @@ class DatabaseModule {
                 appContext,
                 ListsDatabase::class.java,
                 DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     companion object {
         private const val DATABASE_NAME = "Lists"
-
     }
 }

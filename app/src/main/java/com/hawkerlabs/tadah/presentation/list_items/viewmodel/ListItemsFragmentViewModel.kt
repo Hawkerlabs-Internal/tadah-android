@@ -18,7 +18,7 @@ class ListItemsFragmentViewModel @Inject constructor(private val listsUseCase: L
     val item = MutableLiveData<String>("")
     private val listIdLiveData = MutableLiveData<String>()
 
-    val items: LiveData<kotlin.collections.List<ItemAndList>> = listIdLiveData.switchMap { listId ->
+    val items: LiveData<kotlin.collections.List<Item>> = listIdLiveData.switchMap { listId ->
         liveData {
             val repos = listItemUseCase.getItems(listId).asLiveData(Dispatchers.Main)
             emitSource(repos)

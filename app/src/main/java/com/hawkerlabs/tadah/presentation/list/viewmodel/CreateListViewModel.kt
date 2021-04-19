@@ -9,18 +9,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class CreateListViewModel @Inject constructor(private val tasksUseCase : ListsUseCase): ViewModel() {
-    val title = MutableLiveData<String>("")
-    val description = MutableLiveData<String>("")
 
-    fun saveTask(){
+/**
+ * Create task use case for creating a task, as of now only locally
+ */
+@HiltViewModel
+class CreateListViewModel @Inject constructor(private val tasksUseCase: ListsUseCase) : ViewModel() {
+    val title = MutableLiveData("")
+    val description = MutableLiveData("")
+
+    fun saveTask() {
         viewModelScope.launch {
-            tasksUseCase.createList(List(title = title.value.toString(), description = description.value.toString(), status = TASK_TODO ))
+            tasksUseCase.createList(List(title = title.value.toString(), description = description.value.toString()))
         }
     }
 
-    companion object {
-       private  const val TASK_TODO = "TODO"
-    }
+
 }

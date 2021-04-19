@@ -3,11 +3,14 @@ package com.hawkerlabs.tadah.presentation.list.ui
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
+import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.databinding.DialogCreateListBinding
 import com.hawkerlabs.tadah.databinding.FragmentListsBinding
@@ -16,6 +19,7 @@ import com.hawkerlabs.tadah.presentation.MainActivity
 import com.hawkerlabs.tadah.presentation.list.viewmodel.CreateListViewModel
 import com.hawkerlabs.tadah.presentation.list.viewmodel.ListsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class ListsFragment : Fragment() {
@@ -45,6 +49,8 @@ class ListsFragment : Fragment() {
 
     private fun initialize() {
         (activity as? MainActivity)?.hideHomeEnabled("Tadah Smart Todo")
+
+        //For create task show dialog
         binding.addTaskFab.setOnClickListener {
 
             val dialog = Dialog(requireActivity())
@@ -70,7 +76,7 @@ class ListsFragment : Fragment() {
             dialog.window!!.attributes = lp
 
             dialogCreateListBinding.buttonSave.setOnClickListener {
-                createListViewModel.saveTask()
+                createListViewModel.saveTask() // save task
                 dialog.dismiss()
             }
         }
@@ -80,6 +86,7 @@ class ListsFragment : Fragment() {
             var bundle = bundleOf("list" to list)
             findNavController().navigate(R.id.listItemsFragment, bundle)
         }
+
 
 
         //set up the adapter

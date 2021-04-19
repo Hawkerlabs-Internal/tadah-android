@@ -9,10 +9,7 @@
     <fragment
         android:id="@+id/tasksListFragment"
         android:name="com.hawkerlabs.tadah.presentation.list.ui.ListsFragment"
-        android:label="TasksListFragment" >
-        <action
-            android:id="@+id/action_tasksListFragment_to_addTaskFragment"
-            app:destination="@id/addTaskFragment" />
+        android:label="TasksListFragment">
         <action
             android:id="@+id/action_tasksListFragment_to_authActivity"
             app:destination="@id/authActivity" />
@@ -20,10 +17,6 @@
             android:id="@+id/action_tasksListFragment_to_listItemsFragment"
             app:destination="@id/listItemsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/addTaskFragment"
-        android:name="com.hawkerlabs.tadah.presentation.create_list.ui.CreateListFragment"
-        android:label="AddTaskFragment" />
     <activity
         android:id="@+id/authActivity"
         android:name="com.hawkerlabs.tadah.presentation.auth.ui.AuthActivity"
@@ -32,4 +25,5 @@
         android:id="@+id/listItemsFragment"
         android:name="com.hawkerlabs.tadah.presentation.list_items.ui.ListItemsFragment"
         android:label="ListItemsFragment" />
+
 </navigation>

@@ -4,12 +4,14 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.view.*
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.data.database.model.List
 import com.hawkerlabs.tadah.databinding.FragmentListItemsBinding
@@ -71,6 +73,10 @@ class ListItemsFragment : Fragment() {
         //Init adapter
         listItemsAdapter = ListItemsAdapter()
         binding.itemsRecyclerView.adapter = listItemsAdapter
+
+        val dividerItemDecoration = DividerItemDecoration(requireActivity(),
+                LinearLayout.VERTICAL)
+        binding.itemsRecyclerView.addItemDecoration(dividerItemDecoration)
 
         //Fetch items for this list
         viewModel.getItems(list.id)
