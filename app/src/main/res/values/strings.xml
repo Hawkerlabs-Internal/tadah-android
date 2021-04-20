@@ -10,4 +10,6 @@
     <string name="save">Save</string>
     <string name="task_placeholder">Add..</string>
 
+    <string name="splash_loading">Loading…</string>
+
 </resources>

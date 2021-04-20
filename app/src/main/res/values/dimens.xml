@@ -8,6 +8,8 @@
     <dimen name="search_edit_text_stroke_width">1dp</dimen>
     <dimen name="search_edit_text_radius">4dp</dimen>
 
+    <dimen name="margin_yet_extra_large">25dp</dimen>
+
     <!--Padding-->
     <dimen name="padding_small">6dp</dimen>
 
@@ -25,5 +27,7 @@
 
     <dimen name="text_size_large">16sp</dimen>
 
+    <!--Splash Screen-->
+    <dimen name="text_size_splash">20sp</dimen>
 
 </resources>
