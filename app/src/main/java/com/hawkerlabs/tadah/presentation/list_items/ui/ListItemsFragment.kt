@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.data.database.model.List
 import com.hawkerlabs.tadah.databinding.DialogCreateListBinding
@@ -28,6 +30,7 @@ class ListItemsFragment : Fragment() {
     private lateinit var binding: FragmentListItemsBinding
     private val viewModel by viewModels<ListItemsFragmentViewModel>()
     private val dialogListViewModel by viewModels<DialogListViewModel>()
+    private var toast: Toast? = null
 
     private var rotate = false
     private lateinit var list: List
@@ -85,8 +88,26 @@ class ListItemsFragment : Fragment() {
                 LinearLayout.VERTICAL)
         binding.itemsRecyclerView.addItemDecoration(dividerItemDecoration)
 
+
+
+
+        val itemTouchHelper = ItemTouchHelper(object : SwipeHelper(binding.itemsRecyclerView) {
+            override fun instantiateUnderlayButton(position: Int): kotlin.collections.List<UnderlayButton> {
+                var buttons = listOf<UnderlayButton>()
+                val deleteButton = deleteButton(position)
+                buttons = listOf(deleteButton)
+
+                return buttons
+            }
+        })
+
+        itemTouchHelper.attachToRecyclerView(binding.itemsRecyclerView)
+
+
+
+
         //Fetch items for this list
-        viewModel.getItems(list.id)
+        viewModel.getItems(list)
 
         binding.item.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -140,6 +161,27 @@ class ListItemsFragment : Fragment() {
             toggleFabMode(binding.settingsFab)
         }
     }
+
+
+    private fun deleteButton(position: Int) : SwipeHelper.UnderlayButton {
+        return SwipeHelper.UnderlayButton(
+                requireActivity(),
+                "Delete",
+                14.0f,
+                android.R.color.holo_red_light,
+                object : SwipeHelper.UnderlayButtonClickListener {
+                    override fun onClick() {
+                        toast("Deleted item $position")
+                    }
+                })
+    }
+
+    private fun toast(text: String) {
+        toast?.cancel()
+        toast = Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT)
+        toast?.show()
+    }
+
 
     private fun subscribe() {
 

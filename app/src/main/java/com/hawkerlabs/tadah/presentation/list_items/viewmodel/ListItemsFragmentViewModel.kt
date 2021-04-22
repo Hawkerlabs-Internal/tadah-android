@@ -16,11 +16,13 @@ import javax.inject.Inject
 class ListItemsFragmentViewModel @Inject constructor(private val listsUseCase: ListsUseCase,
                                                      private val listItemUseCase: ListItemUseCase) : ViewModel() {
     val item = MutableLiveData<String>("")
-    private val listIdLiveData = MutableLiveData<String>()
 
-    val items: LiveData<kotlin.collections.List<Item>> = listIdLiveData.switchMap { listId ->
+
+    private val listLiveData = MutableLiveData<List>()
+
+    val items: LiveData<kotlin.collections.List<Item>> = listLiveData.switchMap { list ->
         liveData {
-            val repos = listItemUseCase.getItems(listId).asLiveData(Dispatchers.Main)
+            val repos = listItemUseCase.getItems(list.id).asLiveData(Dispatchers.Main)
             emitSource(repos)
         }
     }
@@ -33,23 +35,31 @@ class ListItemsFragmentViewModel @Inject constructor(private val listsUseCase: L
 
     }
 
-    fun updateItem(item : Item){
+    fun updateItem(item: Item) {
         viewModelScope.launch {
             listItemUseCase.updateItem(item)
         }
     }
 
-    fun getItems(listId: String){
-        listIdLiveData.postValue(listId)
+    fun getItems(list: List) {
+        listLiveData.postValue(list)
     }
 
 
     /**
      * Save item for a list
      */
-    fun addItem(listId : String) {
+    fun addItem(listId: String) {
         viewModelScope.launch {
             listItemUseCase.saveItem(Item(listId = listId, title = item.value))
+        }
+
+        viewModelScope.launch {
+            var list = listLiveData.value
+            list?.itemsCount = list?.itemsCount?.plus(1)
+            viewModelScope.launch {
+                listsUseCase.editList(list!!)
+            }
         }
     }
 }

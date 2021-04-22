@@ -45,7 +45,7 @@ class DialogListViewModel @Inject constructor(private val tasksUseCase: ListsUse
      */
     fun saveTask() {
         viewModelScope.launch {
-            tasksUseCase.createList(List(title = title.value.toString(), description = description.value.toString()))
+            tasksUseCase.createList(List(title = title.value.toString(), description = description.value.toString(),itemsCount = 0))
         }
     }
 

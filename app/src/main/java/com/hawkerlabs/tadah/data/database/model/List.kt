@@ -13,7 +13,8 @@ class List(
         val id: String = UUID.randomUUID().toString(),
         var title: String? = null,
         var description: String? = null,
-        var isCompleted: Boolean = false
+        var isCompleted: Boolean = false,
+        var itemsCount: Int? = 0
 ): Parcelable
 
 
