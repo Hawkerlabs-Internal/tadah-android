@@ -11,8 +11,8 @@ import java.util.*
 class List(
         @PrimaryKey
         val id: String = UUID.randomUUID().toString(),
-        val title: String? = null,
-        val description: String? = null,
+        var title: String? = null,
+        var description: String? = null,
         var isCompleted: Boolean = false
 ): Parcelable
 

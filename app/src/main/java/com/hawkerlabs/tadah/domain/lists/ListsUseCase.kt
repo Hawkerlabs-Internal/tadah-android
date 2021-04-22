@@ -8,6 +8,8 @@ interface ListsUseCase {
 
     suspend fun createList(list : List)
 
+    suspend fun editList(list : List)
+
     suspend fun deleteList(list : List)
 
     suspend fun getAllTasks() : Flow<TasksResponse>

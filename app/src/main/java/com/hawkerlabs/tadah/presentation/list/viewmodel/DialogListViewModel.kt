@@ -14,10 +14,35 @@ import javax.inject.Inject
  * Create task use case for creating a task, as of now only locally
  */
 @HiltViewModel
-class CreateListViewModel @Inject constructor(private val tasksUseCase: ListsUseCase) : ViewModel() {
+class DialogListViewModel @Inject constructor(private val tasksUseCase: ListsUseCase) : ViewModel() {
     val title = MutableLiveData("")
     val description = MutableLiveData("")
 
+    lateinit var list : List
+
+    /**
+     * On Edit mode initialize Edit
+     */
+    fun initEdit(l : List) {
+        title.postValue(l.title)
+        description.postValue(l.description)
+        list = l
+    }
+
+    /**
+     * Init Edit used by ListItemsFragment
+     */
+    fun editList() {
+        viewModelScope.launch {
+            list.title = title.value.toString()
+            list.description = description.value.toString()
+            tasksUseCase.editList(list)
+        }
+    }
+
+    /**
+     * Save List
+     */
     fun saveTask() {
         viewModelScope.launch {
             tasksUseCase.createList(List(title = title.value.toString(), description = description.value.toString()))

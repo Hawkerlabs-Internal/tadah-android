@@ -33,6 +33,12 @@ class ListItemsFragmentViewModel @Inject constructor(private val listsUseCase: L
 
     }
 
+    fun updateItem(item : Item){
+        viewModelScope.launch {
+            listItemUseCase.updateItem(item)
+        }
+    }
+
     fun getItems(listId: String){
         listIdLiveData.postValue(listId)
     }

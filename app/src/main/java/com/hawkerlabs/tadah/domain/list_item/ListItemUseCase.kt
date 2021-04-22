@@ -10,4 +10,6 @@ interface ListItemUseCase {
     suspend fun getItems(listId : String) : Flow<List<Item>>
 
     suspend fun saveItem(list : Item)
+
+    suspend fun updateItem(list : Item)
 }

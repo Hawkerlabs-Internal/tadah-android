@@ -21,6 +21,10 @@ class ListsUseCaseImpl @Inject constructor(private val repository : ListsReposit
         repository.createList(list)
     }
 
+    override suspend fun editList(list: List) {
+        repository.editList(list)
+    }
+
     override suspend fun deleteList(list: List) {
         repository.deleteList(list)
     }

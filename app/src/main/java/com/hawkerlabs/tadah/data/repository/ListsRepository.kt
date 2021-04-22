@@ -24,8 +24,14 @@ class ListsRepository @Inject constructor(private val listsDao: ListDao, private
         listsDao.createList(list)
     }
 
+
+    suspend fun editList(list: List) = withContext(Dispatchers.IO) {
+        listsDao.editList(list)
+    }
+
     suspend fun deleteList(list: List) = withContext(Dispatchers.IO) {
         listsDao.deleteList(list)
+        itemsDao.deleteItemsForList(list.id) //delete items for list as well
     }
 
 
@@ -42,5 +48,12 @@ class ListsRepository @Inject constructor(private val listsDao: ListDao, private
      */
     suspend fun saveItem(item: Item) = withContext(Dispatchers.IO) {
         itemsDao.saveItem(item)
+    }
+
+    /**
+     * Update an item
+     */
+    suspend fun updateItem(item: Item) = withContext(Dispatchers.IO) {
+        itemsDao.updateItem(item)
     }
 }

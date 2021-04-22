@@ -26,7 +26,7 @@ class ListItemUseCaseImpl @Inject constructor(private val repository: ListsRepos
 
             //Map it to a list of Items
             val listItems = items.map {
-                Item(it.id, it.listId, it.title)
+                Item(it.id, it.listId, it.title, it.isCompleted)
             }
             _cache.addAll(listItems)
             listItemsFlow.emit(_cache)
@@ -47,6 +47,10 @@ class ListItemUseCaseImpl @Inject constructor(private val repository: ListsRepos
         repository.saveItem(item)
         _cache.add(item)
         listItemsFlow.emit(_cache)
+    }
+
+    override suspend fun updateItem(item: Item) {
+        repository.updateItem(item)
     }
 
 

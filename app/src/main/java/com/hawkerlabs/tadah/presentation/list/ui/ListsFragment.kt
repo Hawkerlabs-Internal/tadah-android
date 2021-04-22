@@ -3,20 +3,17 @@ package com.hawkerlabs.tadah.presentation.list.ui
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
-import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.databinding.DialogCreateListBinding
 import com.hawkerlabs.tadah.databinding.FragmentListsBinding
 import com.hawkerlabs.tadah.domain.lists.model.TasksResponse
 import com.hawkerlabs.tadah.presentation.MainActivity
-import com.hawkerlabs.tadah.presentation.list.viewmodel.CreateListViewModel
+import com.hawkerlabs.tadah.presentation.list.viewmodel.DialogListViewModel
 import com.hawkerlabs.tadah.presentation.list.viewmodel.ListsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +23,7 @@ class ListsFragment : Fragment() {
 
     private lateinit var binding: FragmentListsBinding
     private val viewModel by viewModels<ListsViewModel>()
-    private val createListViewModel by viewModels<CreateListViewModel>()
+    private val dialogListViewModel by viewModels<DialogListViewModel>()
 
     private lateinit var listsAdapter: ListsAdapter
 
@@ -61,7 +58,7 @@ class ListsFragment : Fragment() {
 
             dialog.setContentView(dialogCreateListBinding.root);
 
-            dialogCreateListBinding.viewModel = createListViewModel
+            dialogCreateListBinding.viewModel = dialogListViewModel
             dialogCreateListBinding.lifecycleOwner = this
 
             dialog.setCancelable(true)
@@ -76,7 +73,7 @@ class ListsFragment : Fragment() {
             dialog.window!!.attributes = lp
 
             dialogCreateListBinding.buttonSave.setOnClickListener {
-                createListViewModel.saveTask() // save task
+                dialogListViewModel.saveTask() // save task
                 dialog.dismiss()
             }
         }

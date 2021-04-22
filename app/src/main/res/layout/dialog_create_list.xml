@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.hawkerlabs.tadah.presentation.list.viewmodel.CreateListViewModel" />
+            type="com.hawkerlabs.tadah.presentation.list.viewmodel.DialogListViewModel" />
     </data>
 
     <LinearLayout

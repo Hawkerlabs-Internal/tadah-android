@@ -12,6 +12,9 @@ interface ListItemDao {
     suspend fun getItemsForListFlow(listId : String): ItemsByList
 
 
+    @Query("DELETE FROM items WHERE listId = :listId")
+    suspend fun deleteItemsForList(listId: String): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveItem(item: Item)
 

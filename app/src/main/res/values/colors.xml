@@ -10,10 +10,15 @@
 
     <color name="white_">#00000000</color>
 
-
-    <color name="colorPrimary">#006837</color>
-    <color name="colorPrimaryDark">#004012</color>
-    <color name="colorAccent">#c75f00</color>
+<!--#fed049
+#007580
+#282846
+#ffedf2
+#06edf6, #282846, #5ce1e6, #387cff
+-->
+    <color name="colorPrimary">#387cff</color>
+    <color name="colorPrimaryDark">#282846</color>
+    <color name="colorAccent">#387cff</color>
     <color name="grey_80">#404354</color>
 
     <!-- Edit text-->

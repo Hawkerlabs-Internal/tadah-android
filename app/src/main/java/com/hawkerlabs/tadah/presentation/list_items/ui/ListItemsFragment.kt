@@ -2,6 +2,7 @@ package com.hawkerlabs.tadah.presentation.list_items.ui
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
@@ -14,9 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.hawkerlabs.tadah.R
 import com.hawkerlabs.tadah.data.database.model.List
+import com.hawkerlabs.tadah.databinding.DialogCreateListBinding
 import com.hawkerlabs.tadah.databinding.FragmentListItemsBinding
 import com.hawkerlabs.tadah.presentation.MainActivity
 import com.hawkerlabs.tadah.presentation.list.ui.ListsAdapter
+import com.hawkerlabs.tadah.presentation.list.viewmodel.DialogListViewModel
 import com.hawkerlabs.tadah.presentation.list_items.viewmodel.ListItemsFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,8 +27,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class ListItemsFragment : Fragment() {
     private lateinit var binding: FragmentListItemsBinding
     private val viewModel by viewModels<ListItemsFragmentViewModel>()
+    private val dialogListViewModel by viewModels<DialogListViewModel>()
+
     private var rotate = false
-    private lateinit var list : List
+    private lateinit var list: List
 
     private lateinit var listItemsAdapter: ListItemsAdapter
 
@@ -71,7 +76,9 @@ class ListItemsFragment : Fragment() {
         list = arguments?.get("list") as List
 
         //Init adapter
-        listItemsAdapter = ListItemsAdapter()
+        listItemsAdapter = ListItemsAdapter {
+            viewModel.updateItem(it)
+        }
         binding.itemsRecyclerView.adapter = listItemsAdapter
 
         val dividerItemDecoration = DividerItemDecoration(requireActivity(),
@@ -88,17 +95,55 @@ class ListItemsFragment : Fragment() {
             }
             return@setOnKeyListener false;
         }
-        binding.addItemFab.setOnClickListener { v ->
+        binding.settingsFab.setOnClickListener { v ->
             toggleFabMode(v)
         }
+        //delete list
         binding.delete.setOnClickListener {
             showAlert()
+        }
+        //Edit dialog
+        binding.edit.setOnClickListener {
+            showEditDialog(list)
+        }
+    }
+
+    private fun showEditDialog(list: List) {
+        val dialog = Dialog(requireActivity())
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // before
+        val dialogCreateListBinding: DialogCreateListBinding = DataBindingUtil.inflate(dialog.layoutInflater, R.layout.dialog_create_list,
+                null, false);
+
+        dialog.setContentView(dialogCreateListBinding.root);
+
+        dialogCreateListBinding.viewModel = dialogListViewModel  //set the viewmodel
+        dialogCreateListBinding.lifecycleOwner = this
+
+        dialog.setCancelable(true)
+
+
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window!!.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+
+
+        dialog.show()
+        dialog.window!!.attributes = lp
+
+
+        dialogListViewModel.initEdit(list) // initialize edit mode
+        dialogCreateListBinding.buttonSave.setOnClickListener {
+            dialogListViewModel.editList() // edit the list
+            dialog.dismiss()
+            toggleFabMode(binding.settingsFab)
         }
     }
 
     private fun subscribe() {
 
-        viewModel.items.observe(viewLifecycleOwner){
+        viewModel.items.observe(viewLifecycleOwner) {
             listItemsAdapter.submitList(it?.toMutableList())
         }
     }

@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
 
     companion object {
         private const val SPLASH_SCREEN_DELAY = 3000L
-        private const val SPLASH_IMAGE_URL = "https://tadah-hlabs.s3.ap-south-1.amazonaws.com/splash.png"
+        private const val SPLASH_IMAGE_URL = "https://tadah-hlabs.s3.ap-south-1.amazonaws.com/splash-s2.png"
 
     }
 }

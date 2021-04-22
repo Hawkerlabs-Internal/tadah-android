@@ -11,13 +11,29 @@ interface ListDao {
      fun getAllTasksFlow(): Flow<kotlin.collections.List<List>>
 
 
+    /**
+     * Create
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
      suspend fun createList(task: List)
 
+    /**
+     * Edit
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun editList(task: List)
+
+
+    /**
+     * Delete the list
+     */
     @Delete
     suspend fun deleteList(task: List)
 
 
+    /**
+     * List Items
+     */
     @Transaction
     @Query("SELECT * FROM lists WHERE id = :listId")
     suspend fun getItemsByList(listId: String): ItemsByList

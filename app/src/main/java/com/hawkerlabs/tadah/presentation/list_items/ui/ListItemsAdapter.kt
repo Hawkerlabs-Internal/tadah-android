@@ -10,7 +10,7 @@ import com.hawkerlabs.tadah.data.database.model.Item
 import com.hawkerlabs.tadah.data.database.model.relations.ItemAndList
 import com.hawkerlabs.tadah.databinding.ListItemRowBinding
 
-class ListItemsAdapter : ListAdapter<Item, ListItemsViewHolder>(COMPARATOR) {
+class ListItemsAdapter (private val listener: (Item) -> Unit): ListAdapter<Item, ListItemsViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemsViewHolder {
         val binding: ListItemRowBinding = DataBindingUtil.inflate(
@@ -23,7 +23,7 @@ class ListItemsAdapter : ListAdapter<Item, ListItemsViewHolder>(COMPARATOR) {
     override fun onBindViewHolder(holder: ListItemsViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            holder.bind(item)
+            holder.bind(item, listener)
         }
     }
 
