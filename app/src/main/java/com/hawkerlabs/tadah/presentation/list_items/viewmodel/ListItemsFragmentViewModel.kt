@@ -35,6 +35,28 @@ class ListItemsFragmentViewModel @Inject constructor(private val listsUseCase: L
 
     }
 
+
+    /**
+     * Delete list item
+     */
+    fun deleteListItem(index: Int) {
+        viewModelScope.launch {
+            listItemUseCase.deleteItem(index)
+        }
+
+
+        // Update the list item count
+        viewModelScope.launch {
+            var list = listLiveData.value
+            list?.itemsCount = list?.itemsCount?.minus(1)
+            viewModelScope.launch {
+                listsUseCase.editList(list!!)
+            }
+        }
+
+    }
+
+
     fun updateItem(item: Item) {
         viewModelScope.launch {
             listItemUseCase.updateItem(item)
@@ -61,5 +83,7 @@ class ListItemsFragmentViewModel @Inject constructor(private val listsUseCase: L
                 listsUseCase.editList(list!!)
             }
         }
+
+        item.postValue("")
     }
 }

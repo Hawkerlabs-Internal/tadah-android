@@ -40,6 +40,10 @@ class DialogListViewModel @Inject constructor(private val tasksUseCase: ListsUse
         }
     }
 
+    private fun clearAll(){
+        title.postValue("")
+        description.postValue("")
+    }
     /**
      * Save List
      */
@@ -47,6 +51,7 @@ class DialogListViewModel @Inject constructor(private val tasksUseCase: ListsUse
         viewModelScope.launch {
             tasksUseCase.createList(List(title = title.value.toString(), description = description.value.toString(),itemsCount = 0))
         }
+        clearAll()
     }
 
 

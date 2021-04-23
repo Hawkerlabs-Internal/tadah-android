@@ -56,4 +56,11 @@ class ListsRepository @Inject constructor(private val listsDao: ListDao, private
     suspend fun updateItem(item: Item) = withContext(Dispatchers.IO) {
         itemsDao.updateItem(item)
     }
+
+    /**
+     *
+     */
+    suspend fun deleteItem(item: Item) = withContext(Dispatchers.IO) {
+        itemsDao.deleteItem(item)
+    }
 }

@@ -12,4 +12,7 @@ interface ListItemUseCase {
     suspend fun saveItem(list : Item)
 
     suspend fun updateItem(list : Item)
+
+    suspend fun deleteItem(index : Int)
+
 }

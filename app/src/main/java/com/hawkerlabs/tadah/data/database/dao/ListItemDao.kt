@@ -22,5 +22,5 @@ interface ListItemDao {
     suspend fun updateItem(review: Item)
 
     @Delete
-    suspend fun removeItem(review: Item)
+    suspend fun deleteItem(review: Item)
 }

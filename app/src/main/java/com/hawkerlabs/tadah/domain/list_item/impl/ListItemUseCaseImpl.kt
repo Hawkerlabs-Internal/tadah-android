@@ -53,5 +53,14 @@ class ListItemUseCaseImpl @Inject constructor(private val repository: ListsRepos
         repository.updateItem(item)
     }
 
+    /**
+     * Delete item
+     */
+    override suspend fun deleteItem(index: Int) {
+        repository.deleteItem(_cache[index])
+        _cache.removeAt(index)
+        listItemsFlow.emit(_cache)
+    }
+
 
 }

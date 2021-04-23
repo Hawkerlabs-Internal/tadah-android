@@ -20,7 +20,6 @@ import com.hawkerlabs.tadah.data.database.model.List
 import com.hawkerlabs.tadah.databinding.DialogCreateListBinding
 import com.hawkerlabs.tadah.databinding.FragmentListItemsBinding
 import com.hawkerlabs.tadah.presentation.MainActivity
-import com.hawkerlabs.tadah.presentation.list.ui.ListsAdapter
 import com.hawkerlabs.tadah.presentation.list.viewmodel.DialogListViewModel
 import com.hawkerlabs.tadah.presentation.list_items.viewmodel.ListItemsFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -90,6 +89,7 @@ class ListItemsFragment : Fragment() {
 
 
 
+        //Ref - https://github.com/ntnhon/RecyclerViewRowOptionsDemo
 
         val itemTouchHelper = ItemTouchHelper(object : SwipeHelper(binding.itemsRecyclerView) {
             override fun instantiateUnderlayButton(position: Int): kotlin.collections.List<UnderlayButton> {
@@ -116,6 +116,11 @@ class ListItemsFragment : Fragment() {
             }
             return@setOnKeyListener false;
         }
+        //plus button onclick listener
+        binding.add.setOnClickListener {
+            viewModel.addItem(list.id)
+        }
+        //fab button onclick listener
         binding.settingsFab.setOnClickListener { v ->
             toggleFabMode(v)
         }
@@ -163,6 +168,9 @@ class ListItemsFragment : Fragment() {
     }
 
 
+    /**
+     * Delete button on swipe delete
+     */
     private fun deleteButton(position: Int) : SwipeHelper.UnderlayButton {
         return SwipeHelper.UnderlayButton(
                 requireActivity(),
@@ -171,7 +179,7 @@ class ListItemsFragment : Fragment() {
                 android.R.color.holo_red_light,
                 object : SwipeHelper.UnderlayButtonClickListener {
                     override fun onClick() {
-                        toast("Deleted item $position")
+                        viewModel.deleteListItem(position)
                     }
                 })
     }
